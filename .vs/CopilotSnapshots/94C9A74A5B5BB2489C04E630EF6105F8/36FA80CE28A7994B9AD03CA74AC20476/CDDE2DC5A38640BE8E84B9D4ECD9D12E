@@ -1,0 +1,26 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TaskDashboard.Api.Models;
+
+public class StickyNote
+{
+    public int Id { get; set; }
+    
+    public string? Title { get; set; }
+    
+    public string Content { get; set; } = string.Empty;
+    
+    public string Color { get; set; } = "#fff9c4"; // Default yellow
+    
+    public double PosX { get; set; } = 100;
+    public double PosY { get; set; } = 100;
+    
+    public int ZIndex { get; set; } = 1;
+    
+    [Required]
+    public string UserId { get; set; } = string.Empty;
+    public AppUser User { get; set; } = null!;
+    
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+}
