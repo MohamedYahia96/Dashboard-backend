@@ -42,8 +42,7 @@
               "RelativeToolTip": "TaskDashboard.Api\\Controllers\\StickyNotesController.cs",
               "ViewState": "AgIAAIYAAAAAAAAAAABYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T13:47:46.906Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-21T13:47:46.906Z"
             },
             {
               "$type": "Document",
@@ -55,8 +54,7 @@
               "RelativeToolTip": "TaskDashboard.Api\\Models\\StickyNote.cs",
               "ViewState": "AgIAABUAAAAAAAAAAEBiwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-21T13:47:24.036Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-21T13:47:24.036Z"
             },
             {
               "$type": "Document",
@@ -66,7 +64,7 @@
               "RelativeDocumentMoniker": "TaskDashboard.Api\\Controllers\\NotificationsController.cs",
               "ToolTip": "D:\\Dashboard-App\\backend\\TaskDashboard.Api\\Controllers\\NotificationsController.cs",
               "RelativeToolTip": "TaskDashboard.Api\\Controllers\\NotificationsController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAswDgAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAswD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-20T14:30:00.357Z",
               "EditorCaption": ""

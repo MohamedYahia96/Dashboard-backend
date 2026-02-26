@@ -12,8 +12,8 @@ using TaskDashboard.Api.Data;
 namespace TaskDashboard.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260221130638_AddStickyNotes")]
-    partial class AddStickyNotes
+    [Migration("20260226094256_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
