@@ -18,6 +18,8 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public DbSet<CourseTrack> CourseTracks => Set<CourseTrack>();
     public DbSet<Course> Courses => Set<Course>();
     public DbSet<StickyNote> StickyNotes => Set<StickyNote>();
+    public DbSet<Appointment> Appointments => Set<Appointment>();
+    public DbSet<AppointmentReminder> AppointmentReminders => Set<AppointmentReminder>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -138,5 +140,26 @@ public class AppDbContext : IdentityDbContext<AppUser>
 
         builder.Entity<StickyNote>()
             .HasIndex(sn => sn.UserId);
+
+        // Appointment → User
+        builder.Entity<Appointment>()
+            .HasOne(a => a.User)
+            .WithMany()
+            .HasForeignKey(a => a.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // AppointmentReminder → Appointment
+        builder.Entity<AppointmentReminder>()
+            .HasOne(ar => ar.Appointment)
+            .WithMany(a => a.Reminders)
+            .HasForeignKey(ar => ar.AppointmentId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Indexes for Appointments
+        builder.Entity<Appointment>()
+            .HasIndex(a => a.UserId);
+        
+        builder.Entity<AppointmentReminder>()
+            .HasIndex(ar => ar.IsSent);
     }
 }
