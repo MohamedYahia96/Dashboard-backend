@@ -21,6 +21,13 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public DbSet<Appointment> Appointments => Set<Appointment>();
     public DbSet<AppointmentReminder> AppointmentReminders => Set<AppointmentReminder>();
 
+    // Academic Plan
+    public DbSet<University> Universities => Set<University>();
+    public DbSet<Faculty> Faculties => Set<Faculty>();
+    public DbSet<AcademicYear> AcademicYears => Set<AcademicYear>();
+    public DbSet<AcademicSemester> AcademicSemesters => Set<AcademicSemester>();
+    public DbSet<AcademicSubject> AcademicSubjects => Set<AcademicSubject>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -161,5 +168,64 @@ public class AppDbContext : IdentityDbContext<AppUser>
         
         builder.Entity<AppointmentReminder>()
             .HasIndex(ar => ar.IsSent);
+
+        // ── Academic Plan ─────────────────────────────────────────────
+
+        // University → User
+        builder.Entity<University>()
+            .HasOne(u => u.User)
+            .WithMany()
+            .HasForeignKey(u => u.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<University>()
+            .HasIndex(u => u.UserId);
+
+        // Faculty → University (cascade)
+        builder.Entity<Faculty>()
+            .HasOne(f => f.University)
+            .WithMany(u => u.Faculties)
+            .HasForeignKey(f => f.UniversityId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Faculty>()
+            .HasIndex(f => f.UniversityId);
+
+        // AcademicYear → Faculty (cascade)
+        builder.Entity<AcademicYear>()
+            .HasOne(y => y.Faculty)
+            .WithMany(f => f.AcademicYears)
+            .HasForeignKey(y => y.FacultyId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<AcademicYear>()
+            .HasIndex(y => y.FacultyId);
+
+        // AcademicSemester → AcademicYear (cascade)
+        builder.Entity<AcademicSemester>()
+            .HasOne(s => s.AcademicYear)
+            .WithMany(y => y.Semesters)
+            .HasForeignKey(s => s.AcademicYearId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<AcademicSemester>()
+            .HasIndex(s => s.AcademicYearId);
+
+        // AcademicSubject → AcademicSemester (cascade)
+        builder.Entity<AcademicSubject>()
+            .HasOne(sub => sub.Semester)
+            .WithMany(s => s.Subjects)
+            .HasForeignKey(sub => sub.SemesterId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // AcademicSubject → User
+        builder.Entity<AcademicSubject>()
+            .HasOne(sub => sub.User)
+            .WithMany()
+            .HasForeignKey(sub => sub.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<AcademicSubject>()
+            .HasIndex(sub => new { sub.UserId, sub.SemesterId });
     }
 }
